@@ -1,0 +1,19 @@
+$ lake env leanchecker --verbose PrimeCarry.Certificate
+replaying PrimeCarry.Certificate
+exit status: 0
+
+$ lake env leanchecker --verbose PrimeCarry.Derivative
+replaying PrimeCarry.Derivative
+exit status: 0
+
+$ lake env leanchecker --verbose PrimeCarry.Encoding
+replaying PrimeCarry.Encoding
+exit status: 0
+
+$ lake env leanchecker --verbose PrimeCarry.Reduction
+replaying PrimeCarry.Reduction
+exit status: 0
+
+$ lake env leanchecker --verbose PrimeCarry.Result
+replaying PrimeCarry.Result
+exit status: 0

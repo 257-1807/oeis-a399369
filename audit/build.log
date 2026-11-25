@@ -1,0 +1,41 @@
+$ lean --version
+Lean (version 4.36.0, arm64-apple-darwin24.6.0, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)
+exit status: 0
+
+$ lake --version
+Lake version 5.0.0-src+611c117 (Lean version 4.36.0)
+exit status: 0
+
+$ git -C .lake/packages/mathlib rev-parse HEAD
+fc4f59e577feb1a4956671bc04ac18aaaf8cd842
+exit status: 0
+
+$ lake --wfail build
+✔ [6616/6628] Built PrimeCarry.Reduction (1.5s)
+✔ [6618/6628] Built PrimeCarry.Derivative (2.9s)
+✔ [6620/6628] Built PrimeCarry.Encoding (2.2s)
+✔ [6622/6628] Built PrimeCarry.Certificate (8.6s)
+ℹ [6624/6628] Built PrimeCarry.Result (2.3s)
+info: PrimeCarry/Result.lean:42:0: 'PrimeCarry.refute_A399369_conjecture2' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [6626/6628] Built PrimeCarry (1.5s)
+info: PrimeCarry.lean:6:0: 'PrimeCarry.derivative_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:7:0: 'PrimeCarry.derivative_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:8:0: 'PrimeCarry.reduced_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:9:0: 'PrimeCarry.reduced_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:10:0: 'PrimeCarry.collision' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:11:0: 'PrimeCarry.refute_A399369_conjecture2' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (6628 jobs).
+exit status: 0
+
+$ lake build
+ℹ [6624/6628] Replayed PrimeCarry.Result
+info: PrimeCarry/Result.lean:42:0: 'PrimeCarry.refute_A399369_conjecture2' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [6626/6628] Replayed PrimeCarry
+info: PrimeCarry.lean:6:0: 'PrimeCarry.derivative_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:7:0: 'PrimeCarry.derivative_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:8:0: 'PrimeCarry.reduced_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:9:0: 'PrimeCarry.reduced_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:10:0: 'PrimeCarry.collision' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: PrimeCarry.lean:11:0: 'PrimeCarry.refute_A399369_conjecture2' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (6628 jobs).
+exit status: 0

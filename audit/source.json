@@ -1,0 +1,30 @@
+{
+  "problem": "A399369, Conjecture 2",
+  "author": "Antti Karttunen",
+  "date": "2026-08-27",
+  "audit_date": "2026-11-25",
+  "upstream": "https://github.com/oeis/oeisdata",
+  "commit": "be2f360122f661bddebad22b15440935d21ac598",
+  "records": [
+    {
+      "id": "A399369",
+      "repository_path": "seq/A399/A399369.seq",
+      "sha256": "9e4f007726b025b601119a45270f24fbc924a629467c5a71f668d3fabe753ba0"
+    },
+    {
+      "id": "A376418",
+      "repository_path": "seq/A376/A376418.seq",
+      "sha256": "9ec036bd8f62ee76c7fca60cd5f68f62db38fb3aa93f547c249d3459fc5b6993"
+    },
+    {
+      "id": "A392878",
+      "repository_path": "seq/A392/A392878.seq",
+      "sha256": "13840d379806a275919fef5cfbbaed0acd25a33cee3b456df15bd3d7b7087065"
+    },
+    {
+      "id": "A003415",
+      "repository_path": "seq/A003/A003415.seq",
+      "sha256": "3aff4a0a7c570b3fbee7ed89e812a06da6ef78a4d101b8ceee2917912da52c16"
+    }
+  ]
+}
