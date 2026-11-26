@@ -21,3 +21,9 @@ A376418 的定义先计算完全可加的素数阶乘对数，再将各进位数
 | Figshare、Zenodo 与等价见证 | Figshare 原生搜索题号无结果。Zenodo 直接查询受 HTTP 403 限制；另查 DataCite、OpenAlex 及公开研究网页，采用题号、关联序列编号，以及 `3916 1024 241`、`primorial difference`、`prime carry arithmetic derivative collision` 等关键词。没有发现此有限证书。[Figshare 查询端点](https://api.figshare.com/v2/articles/search) |
 
 这些检索结果说明在所列日期、渠道及术语范围内没有发现已公开的相同解答。数据库延迟、其他记号或未收录稿件仍可能影响优先权判断。
+
+## 2026-11-25 发布后的独立复核
+
+直接访问 OEIS 的内部格式页面，修订号仍为 #18（8 月 31 日），COMMENTS 保留 Karttunen 的猜想 1 和猜想 2。GitHub 再查 `"A399369" in:readme` 只返回本项目；代码组合查询 `"A399369" "A376418"` 命中 TrureTuring 先前的有限筛查。该报告在 $k\le100000$ 时仅找到 $(j,k)=(16,28)$。本项目的公开提交给出的是猜想 2 的另一组见证，现有证书没有确定 A399370 选取的最大 $j$。[OEIS 修订 #18](https://oeis.org/A399369/internal) · [先前的有限筛查](https://github.com/the-omega-institute/trureturing/blob/bfe530ad72468226ec6cad375e2d8840cc517f92/Library/Words/oeis2026triage0911.md#L159-L161) · [本项目的反例提交](https://github.com/257-1807/oeis-a399369/commit/5ebeb1175a7c81d36f5da230edc4114f975cbd66)
+
+独立复核下载了两个 OEIS 官方数表。对每个 $1\le n\le4000$，逐次进位和混合进制编解码两种算法算出的进位差都与 A376418 相符。由素因子分解算出的算术导数也与 A003415 全部相符。另行重跑仓库自带的离线脚本，在限定为 4000 的搜索中重新得到核心 $(1024,3916)$ 和尺度 $241^{67}$，随后核验了缩放见证的两个不变量。下载文件的 SHA-256 分别为 `ba53cadda811e206ba4ee20888cbae2314ceefe13c5744d6c1dcd8962e06e552`（A376418）与 `c2b8a9271a472a34b1eca8eb1a7f6f58e9bb2470026f85542b072821e6895588`（A003415）。[A376418 数据表](https://oeis.org/A376418/b376418.txt) · [A003415 数据表](https://oeis.org/A003415/b003415.txt) · [仓库离线脚本](../scripts/check_witness.py)

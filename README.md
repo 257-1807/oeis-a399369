@@ -1,10 +1,12 @@
-# OEIS A399369：算术导数与素数进位差的一组新碰撞
+# OEIS A399369 猜想 2 的反例：算术导数与素数进位差同时相等
 
 Antti Karttunen 的猜想 2 认为，在指定范围内，只有 $(16,28)$ 同时具有相同的算术导数和相同的素数进位差。取
 
 $$c=241^{67},\qquad j=1024c,\qquad k=3916c.$$
 
 这是另一组满足全部条件的整数。它们的共同进位差为 $979c$，共同算术导数为 $1\,302\,528\cdot241^{66}$。Lean 4 从原始混合进位定义计算并验证了两者，因此该唯一性猜想为假。[反例与主定理](PrimeCarry/Result.lean) · [实际公理输出](audit/axioms.log)
+
+[证明](#反例是怎样构造的) · [Lean 主文件](PrimeCarry/Result.lean) · [查重与先例](audit/prior-art.md)
 
 ## 原题
 
@@ -23,6 +25,8 @@ Karttunen 于 2026 年 8 月 27 日提出 OEIS A399369。该公开条目描述�
 原作者也直接定义 $R=\mathrm{A276086}\circ\mathrm{A276085}$。令 $W(p)$ 为所有小于 $p$ 的素数之积。先编码为 $L(n)=\sum_p e_p W(p)$，再依次以 $2,3,5,\ldots$ 取余和整除，用所得余数作为素因子指数。Lean 采用这个复合定义，Python 则分别计算复合定义和逐次进位的结果。[A376418](https://oeis.org/A376418) · [A392878 的定义与两套原始算法](https://oeis.org/A392878) · [Lean 编码与解码](PrimeCarry/Reduction.lean)
 
 ## 反例是怎样构造的
+
+先让两数的进位差相同，再用乘法法则消去算术导数的差。选择足够高的素数位作缩放，才可以修正导数又保留前一步的进位结构。
 
 先找一对进位差已相等的小整数，再乘同一个数调整算术导数。原始两个整数的计算为
 
@@ -45,7 +49,11 @@ $$
 
 算术导数的两边分别为 $(5120\cdot241+1024\cdot67)241^{66}$ 和 $(4316\cdot241+3916\cdot67)241^{66}$，括号内均为 $1\,302\,528$。最后，$0<16<j<k$，且 $2^2\mid k$，所以 $k$ 满足原条目的素数幂条件，$j$ 是符合要求的更小正整数。[两个编码值的证明](PrimeCarry/Encoding.lean) · [两条解码证书](PrimeCarry/Certificate.lean)
 
-本结果解决猜想 2。猜想 1 对 $j$ 有额外的最大性条件，本项目没有核定该最大性。A379240 还比较 $\gcd(n,D(n))$；对本见证，两值分别为 $1024\cdot241^{66}$ 和 $4\cdot241^{66}$。这组见证直接反驳的是上述双重相等的唯一性断言。[关联命题与先例核对](audit/related-work.md)
+**为什么这个见证区分了两个猜想？** 猜想 1 通过 A399370 指定最大同差前驱。令 $t=241^{66}$ 并取 $j_1=256\cdot979t$。此时 $(j,j_1,k)=(246784,250624,943756)t$，所以 $j<j_1<k$。低位 $2^8$ 先化为 $3^4$，再进为 $3\cdot5=15$。由于 $979=11\cdot89$ 且 $66<241$，其余指数保留，故 $R(j_1)=15\cdot979t$。于是 $G(j_1)=(256-15)979t=979c=G(k)$。这项补充计算说明 $j$ 并非最大同差前驱，Lean 主定理反驳的是猜想 2 的唯一性。[A399370 的最大性定义](https://oeis.org/A399370/internal)
+
+A379240 还比较 $\gcd(n,D(n))$；对本见证，两值分别为 $1024\cdot241^{66}$ 和 $4\cdot241^{66}$。这组见证直接反驳的是上述双重相等的唯一性断言。[关联命题与先例核对](audit/related-work.md)
+
+发布后的独立核对用 OEIS 官方数表检查了前 4,000 个正整数。算术导数与 A003415 相符，两种进位算法所得的差均与 A376418 相符。这个小范围核对用于验证实现对序列定义的解释；上面的大整数见证由 Lean 的精确证书验证。[官方数表与复核记录](audit/prior-art.md)
 
 ## 忠实性对照
 
@@ -69,7 +77,6 @@ $$
 
 ```sh
 lake exe cache get Mathlib.Tactic Mathlib.Data.Nat.Factorization.Induction Mathlib.NumberTheory.Primorial Mathlib.NumberTheory.Bertrand
-lake build
 lake --wfail build
 lake env lean -DwarningAsError=true PrimeCarry.lean
 for m in Derivative Reduction Encoding Certificate Result; do
